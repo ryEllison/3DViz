@@ -1,0 +1,74 @@
+---
+output:
+  github_document:
+    keep_html: TRUE
+---
+        
+```{r, hex, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', out.width = '25%', out.height = '25%'}
+
+##Sys block
+options(warn = -1)
+
+##Library block
+library(showtext)
+library(hexSticker)
+library(knitr)
+
+##Code block
+font_add_google('Righteous', 'text')
+showtext_auto()
+
+sticker('./rmd/fts/img.jpg', 
+        package = '3DViz',
+        p_size = 125,
+        p_family = 'text',
+        p_color = 'black',
+        p_x = 1,
+        p_y = .575,
+        h_fill = 'black',
+        h_color = 'black',
+        h_size = 1,
+        s_x = 1,
+        s_y = 1,
+        s_width = .75,
+        s_height = .75,
+        filename = './rmd/fts/hex.png',
+        dpi = 2000)
+
+include_graphics('./rmd/fts/hex.png')
+
+```
+
+# Summary
+
+3DViz is a 3D/4D visualization dashboard, written in [R 3.6.2](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a [Shiny](https://shiny.rstudio.com/) backend, that produces publishable high-dimensional figures. 3DViz is pre-packaged with a complete computational engine. As such, 3DViz can be downloaded, configured, and launched utilizing an end-user's local system as its server.
+
+# Download/Configure
+
+3DViz can be downloaded from its [Github](https://github.com/ryEllison/3DViz) repo. Once downloaded, the __config.bat__ executable should be launched to ensure proper backend configuration on the user's local system before use. 3DViz configuration is only needed once. 
+
+# Use
+
+After 3DViz configuration, the application can be launched and used as follows:
+
+1. Launch via the __\_init\_.bat__ executable 
+
+    + A terminal will open indicating the creation of a local server 
+
+2. After the server is created, an internet browser (e.g., Chrome or Firefox) should be opened
+
+3. __localhost:3838__ should be entered as a web address 
+
+    + This will launch a local version of the Shiny dashboard
+
+4. A file browser will appear, and the user can navigate to and select a __\*.csv__ dataset
+
+    + The data file should be structured such that each column represents a vector of data (datasets meant for testing purposes can be referred to as examples)
+
+5. Once a dataset is selected, 3DViz will load in the data and open
+
+    + User controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as pdf files
+
+# Test
+
+When 3DViz is launched (see __Use__), a file browser will appear. Inside the file browser should be a __data__ directory in which are three toy datasets. The user should select one of these datasets, plot the data, and export the figure as a test of proper configuration of the Shiny dashboard.
