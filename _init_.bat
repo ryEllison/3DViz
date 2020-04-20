@@ -4,7 +4,7 @@
 
 ::dir management
 set srcDir=%CD%
-cd "./env/distro/R/R-3.6.2/bin"
+cd "./env/distro/R/R-3.6.2/bin/x64"
 
 ::create local server
 echo ~! Creating local server !~
