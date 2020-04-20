@@ -6,7 +6,7 @@
 setx path "%path%;%CD%/env/distro/R/win-library/3.6"
 echo:
 set srcDir=%CD%
-cd "./env/distro/R/R-3.6.2/bin/x64"
+cd "./env/distro/R/R-3.6.2/bin"
 
 ::configure
 echo ~! Configuring local environment !~
