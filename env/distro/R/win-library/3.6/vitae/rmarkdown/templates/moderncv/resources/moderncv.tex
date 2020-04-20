@@ -1,0 +1,109 @@
+%% start of file `template.tex'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com).
+%
+% Adapted to be an Rmarkdown template by Mitchell O'Hara-Wild
+% 8 February 2019
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[$if(fontsize)$$fontsize$$else$11pt$endif$,$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$$else$a4paper$endif$,$for(classoption)$$classoption$$sep$,$endfor$]{moderncv}
+
+% moderncv themes
+\moderncvstyle{$theme$}                             % style options are 'casual' (default), 'classic', 'banking', 'oldstyle' and 'fancy'
+
+\definecolor{color0}{rgb}{0,0,0}% black
+\definecolor{color1}{HTML}{$if(headcolor)$$headcolor$$else$3873B3$endif$}% custom
+\definecolor{color2}{rgb}{0.45,0.45,0.45}% dark grey
+
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$else$
+\usepackage[scaled=0.86]{DejaVuSansMono}
+$endif$
+
+\providecommand{\tightlist}{%
+	\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\def\donothing#1{#1}
+\def\emaillink#1{#1}
+
+%\nopagenumbers{}                                  % uncomment to suppress automatic page numbering for CVs longer than one page
+
+% character encoding
+%\usepackage[utf8]{inputenc}                       % if you are not using xelatex ou lualatex, replace by the encoding you are using
+%\usepackage{CJKutf8}                              % if you need to use CJK to typeset your resume in Chinese, Japanese or Korean
+
+% adjust the page margins
+\usepackage[scale=0.75,footskip=52pt]{geometry}
+%\setlength{\hintscolumnwidth}{3cm}                % if you want to change the width of the column with the dates
+%\setlength{\makecvheadnamewidth}{10cm}            % for the 'classic' style, if you want to force the width allocated to your name and avoid line breaks. be careful though, the length is normally calculated to avoid any overlap with your personal info; use this at your own typographical risks...
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+% personal data
+\name{$if(surname)$$name$$endif$}{$if(surname)$$surname$$else$$name$$endif$}
+$if(position)$\title{$position$}$endif$
+$if(address)$\address{$address$}{}{}$endif$
+$if(phone)$\phone[mobile]{$phone$}$endif$ % Phone number
+$if(email)$\email{\donothing{$email$}}$endif$
+$if(www)$\homepage{$www$}$endif$ % Personal website
+$if(linkedin)$\social[linkedin]{$linkedin$}$endif$
+$if(twitter)$\social[twitter]{$twitter$}$endif$
+$if(github)$\social[github]{$github$}$endif$
+% \extrainfo{additional information}                 % optional, remove / comment the line if not wanted
+
+$if(profilepic)$\photo[70pt][0.4pt]{$profilepic$}$endif$
+
+$if(aboutme)$
+\quote{$aboutme$}
+$endif$
+
+% Templates for detailed entries
+% Arguments: what when with where why
+\usepackage{etoolbox}
+\def\detaileditem#1#2#3#4#5{
+	\cventry{#2}{#1}{#3}{#4}{}{{\ifx#5\empty\else{\begin{itemize}#5\end{itemize}}\fi}}}
+\def\detailedsection#1{\nopagebreak#1}
+
+% Templates for brief entries
+% Arguments: what when with
+\def\briefitem#1#2#3{\cvitem{#2}{#1. #3}}
+\def\briefsection#1{\nopagebreak#1}
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+%\begin{CJK*}{UTF8}{gbsn}                          % to typeset your resume in Chinese using CJK
+%-----       resume       ---------------------------------------------------------
+\makecvtitle
+
+$if(linestretch)$
+\setstretch{$linestretch$}
+$endif$
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$body$
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+\end{document}
+
+%\clearpage\end{CJK*}                              % if you are typesetting your resume in Chinese using CJK; the \clearpage is required for fancyhdr to work correctly with CJK, though it kills the page numbering by making \lastpage undefined
+\end{document}
+
+
+%% end of file `template.tex'.

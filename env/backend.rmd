@@ -1,0 +1,390 @@
+---
+title: '3DViz'
+author: 'Ryan Ellison'
+output: 
+  flexdashboard::flex_dashboard:
+runtime: shiny
+---
+
+<!-- Global fxnality ensures multiplicty of orginal data IF shared on public container -->
+```{r global, include=FALSE}
+
+###Sys block
+#Non-verbose warnings
+options(warn = -1)
+
+#Establishment of local sys dir via helper fxn
+temp <- read.csv('directory.csv')
+dir <- temp[[2]]
+
+###Library block
+#Atomic vector of dependencies
+dependencies <- c('plot3D',
+                  'RColorBrewer')
+
+#Load
+for (i in dependencies){
+  #character.only = TRUE is argue required for base-R dependency loop because of NSE method of library
+  suppressMessages(library(i, 
+            				         lib.loc = c(paste(dir, 'env/distro/R/win-library/3.6', sep = '/'),
+            				                     paste(dir, 'env/distro/R/R-3.6.2/library', sep = '/')),
+            				         character.only = TRUE))
+}
+
+###Fxn block
+scatter3D_fancy <- function(x, y, z,..., col, colvar = z){
+  if (FALSE){
+    'nD visualization with XY 2D mapping'
+  }
+  
+  #Creation of 2D projection
+  panelFirst <- function(pmat){
+    #Project 3D object in 2D
+    XY <- trans3D(x, y, z = rep(min(z), length(z)), pmat = pmat)
+    
+    #Create scatter plot in 2D
+    scatter2D(XY$x, XY$y,
+              colvar = colvar,
+              colkey = FALSE,
+              pch = 20,
+              cex = 1,
+              col = col,
+              alpha = 0.75,
+              add = TRUE)
+  }
+  
+  #Create 3D projection
+  scatter3D(x, y, z,..., 
+            colvar = colvar,
+            col = col,
+            colkey = list(length = 0.5, 
+                          width = 0.5, 
+                          cex.clab = 0.75),
+            panel.first = panelFirst)
+}
+
+pltnD <- function(regPlot, vertPlot, fancyPlot, x, y, z, c, xLab, yLab, zLab, cLab, size3D, pal, theta, phi){
+  if (FALSE){
+    'nD plotting fxn'
+  }
+  
+  #Visualize
+  if (regPlot){
+    scatter3D(x, y, z,
+              colvar = c,
+              colkey = list(length = 0.5,
+                            width = 0.5,
+                            cex.clab = 0.75),
+              clab = cLab,
+              xlab = xLab,
+              ylab = yLab,
+              zlab = zLab,
+              bty = 'g',
+              pch = 20,
+              cex = size3D,
+              col = pal,
+              type = 'p',
+              ticktype = 'detailed',
+              theta = theta,
+              phi = phi)  
+  }
+  
+  if (vertPlot){
+    #Visualize
+    scatter3D(x, y, z,
+              colvar = c,
+              colkey = list(length = 0.5,
+                            width = 0.5,
+                            cex.clab = 0.75),
+              clab = cLab,
+              xlab = xLab,
+              ylab = yLab,
+              zlab = zLab,
+              bty = 'g',
+              pch = 20,
+              cex = size3D,
+              col = pal,
+              type = 'h',
+              ticktype = 'detailed',
+              theta = theta,
+              phi = phi)  
+  }
+  
+  if (fancyPlot){
+    #Visualize
+    scatter3D_fancy(x, y, z,
+                    colvar = c,
+                    clab = cLab,
+                    xlab = xLab,
+                    ylab = yLab,
+                    zlab = zLab,
+                    bty = 'g',
+                    pch = 20,
+                    cex = size3D,
+                    col = pal,
+                    ticktype = 'detailed',
+                    theta = theta,
+                    phi = phi)
+  }
+}
+
+###Load data in 'global' chunk via file browser upon launch
+data <- read.csv(file.choose())
+
+```
+
+Inputs {.sidebar data-width=325}
+------------------------------------------------------
+  
+### __X Axis__
+  
+```{r}
+
+selectInput(inputId = 'xVec',
+            label = 'Vector',
+            choices = colnames(data))
+
+textInput(inputId = 'xLab',
+          label = 'Label')
+
+```
+
+### __Y Axis__
+
+```{r}
+
+selectInput(inputId = 'yVec',
+            label = 'Vector',
+            choices = colnames(data))
+
+textInput(inputId = 'yLab',
+          label = 'Label')
+
+```
+
+### __Z Axis__
+
+```{r}
+
+selectInput(inputId = 'zVec',
+            label = 'Vector',
+            choices = colnames(data))
+
+textInput(inputId = 'zLab',
+          label = 'Label')
+
+```
+
+### __Color Key__
+
+```{r}
+
+selectInput(inputId = 'cVec',
+            label = 'Vector',
+            choices = colnames(data))
+
+textInput(inputId = 'cLab',
+          label = 'Label')
+
+```
+
+### __Characteristics__
+
+```{r}
+
+sliderInput(inputId = 'size', 
+            label = 'Symbol Size',
+            min = 0, 
+            max = 5,
+            step = 0.25,
+            value = 1)
+
+selectInput(inputId = 'col',
+            label = 'Color Palette',
+            choices = rownames(brewer.pal.info))
+
+sliderInput(inputId = 'horizontal', 
+            label = 'Horizontal Aspect',
+            min = 0, 
+            max = 360,
+            value = 45)
+
+sliderInput(inputId = 'vertical', 
+            label = 'Vertical Aspect',
+            min = 0, 
+            max = 360,
+            value = 40)
+
+```
+
+### __Save__
+
+```{r}
+
+div(style = 'display: inline-block; width: 98%; text-align: center',
+    radioButtons(inputId = 'version',
+                 label = 'Select Version',
+                 choices = c('Version 1',
+                             'Version 2',
+                             'Version 3'),
+                 inline = TRUE))
+
+div(style = 'display: inline-block; width: 98%; text-align: center',
+    downloadButton(outputId = 'save',
+                   label = '',
+                   style = 'width: 40%'))
+
+output$save <- downloadHandler(
+  file = function(){paste(floor(runif(1, min = 0, max = 10^10)), '.pdf', sep = '')},
+  content = function(file){
+    pdf(file)
+    
+    if (input$version == 'Version 1'){
+      pltnD(regPlot = TRUE,
+            vertPlot = FALSE,
+            fancyPlot = FALSE,
+            data[,c(input$xVec)],
+            data[,c(input$yVec)],
+            data[,c(input$zVec)],
+            data[,c(input$cVec)],
+            input$xLab,
+            input$yLab,
+            input$zLab,
+            input$cLab,
+            input$size,
+            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+            input$horizontal,
+            input$vertical)
+    }
+    
+    if (input$version == 'Version 2'){
+      pltnD(regPlot = FALSE,
+            vertPlot = TRUE,
+            fancyPlot = FALSE,
+            data[,c(input$xVec)],
+            data[,c(input$yVec)],
+            data[,c(input$zVec)],
+            data[,c(input$cVec)],
+            input$xLab,
+            input$yLab,
+            input$zLab,
+            input$cLab,
+            input$size,
+            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+            input$horizontal,
+            input$vertical)
+    }
+    
+    if (input$version == 'Version 3'){
+      pltnD(regPlot = FALSE,
+            vertPlot = FALSE,
+            fancyPlot = TRUE,
+            data[,c(input$xVec)],
+            data[,c(input$yVec)],
+            data[,c(input$zVec)],
+            data[,c(input$cVec)],
+            input$xLab,
+            input$yLab,
+            input$zLab,
+            input$cLab,
+            input$size,
+            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+            input$horizontal,
+            input$vertical)
+    }
+
+    dev.off()
+  }
+)
+
+```
+<br/>
+
+Column {data-width=225}
+------------------------------------------------------
+  
+### Dataset
+
+```{r}
+
+renderTable({
+  data
+})
+
+```
+
+Column {.tabset}
+------------------------------------------------------
+  
+### Version 1
+  
+```{r}
+
+renderPlot({
+  pltnD(regPlot = TRUE,
+        vertPlot = FALSE,
+        fancyPlot = FALSE,
+        data[,c(input$xVec)],
+        data[,c(input$yVec)],
+        data[,c(input$zVec)],
+        data[,c(input$cVec)],
+        input$xLab,
+        input$yLab,
+        input$zLab,
+        input$cLab,
+        input$size,
+        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+        input$horizontal,
+        input$vertical)
+})
+
+```
+
+### Version 2
+
+```{r}
+
+renderPlot({
+  pltnD(regPlot = FALSE,
+        vertPlot = TRUE,
+        fancyPlot = FALSE,
+        data[,c(input$xVec)],
+        data[,c(input$yVec)],
+        data[,c(input$zVec)],
+        data[,c(input$cVec)],
+        input$xLab,
+        input$yLab,
+        input$zLab,
+        input$cLab,
+        input$size,
+        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+        input$horizontal,
+        input$vertical)
+})
+
+```
+
+### Version 3
+
+```{r}
+
+renderPlot({
+  pltnD(regPlot = FALSE,
+        vertPlot = FALSE,
+        fancyPlot = TRUE,
+        data[,c(input$xVec)],
+        data[,c(input$yVec)],
+        data[,c(input$zVec)],
+        data[,c(input$cVec)],
+        input$xLab,
+        input$yLab,
+        input$zLab,
+        input$cLab,
+        input$size,
+        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+        input$horizontal,
+        input$vertical)
+})
+
+```
+

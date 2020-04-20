@@ -1,0 +1,11 @@
+geom_hexagon	geom_hexagon
+geom_pkgname	geom_pkgname
+geom_subview	reexports
+geom_url	geom_url
+ggplot	reexports
+reexports	reexports
+save_sticker	save_sticker
+sticker	sticker
+sticker_dev	sticker_dev
+theme_sticker	theme_sticker
+theme_transparent	reexports
