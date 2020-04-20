@@ -39,7 +39,7 @@ follows:
     
       - The data file should be structured such that each column
         represents a vector of data (datasets meant for testing purposes
-        can be referred to as examples)
+        can be referred to as examples, see **Test**)
 
 5.  Once a dataset is selected, 3DViz will load in the data and open
     
@@ -52,5 +52,5 @@ follows:
 When 3DViz is launched (see **Use**), a file browser will appear. Inside
 the file browser should be a **data** directory in which are three toy
 datasets. The user should select one of these datasets, plot the data,
-and export the figure as a test of proper configuration of the Shiny
-dashboard.
+and export the figure as a test of proper configuration and function of
+the Shiny dashboard.
