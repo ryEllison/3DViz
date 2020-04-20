@@ -53,7 +53,7 @@ After 3DViz configuration, the application can be launched and used as follows:
 
 1. Launch via the __\_init\_.bat__ executable 
 
-    + A terminal will open indicating the creation of a local server 
+    + A terminal will open indicating the creation of a local server ("Listening on...") 
 
 2. After the server is created, an internet browser (e.g., Chrome or Firefox) should be opened
 
@@ -71,4 +71,4 @@ After 3DViz configuration, the application can be launched and used as follows:
 
 # Test
 
-When 3DViz is launched (see __Use__), a file browser will appear. Inside the file browser should be a __data__ directory in which are three toy datasets. The user should select one of these datasets, plot the data, and export the figure as a test of proper configuration and function of the Shiny dashboard.
+When 3DViz is launched (see __Use__), a file browser will appear. Inside the file browser should be three toy datasets. The user should select one of these datasets, plot the data, and export the figure as a test of proper configuration and function of the Shiny dashboard.

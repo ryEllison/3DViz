@@ -26,6 +26,7 @@ follows:
 1.  Launch via the **\_init\_.bat** executable
     
       - A terminal will open indicating the creation of a local server
+        (“Listening on…”)
 
 2.  After the server is created, an internet browser (e.g., Chrome or
     Firefox) should be opened
@@ -50,7 +51,6 @@ follows:
 # Test
 
 When 3DViz is launched (see **Use**), a file browser will appear. Inside
-the file browser should be a **data** directory in which are three toy
-datasets. The user should select one of these datasets, plot the data,
-and export the figure as a test of proper configuration and function of
-the Shiny dashboard.
+the file browser should be three toy datasets. The user should select
+one of these datasets, plot the data, and export the figure as a test of
+proper configuration and function of the Shiny dashboard.
