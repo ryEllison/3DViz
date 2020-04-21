@@ -119,7 +119,7 @@ d <- reactive({
   infile <- input$data
 
   if (is.null(infile)){
-    read.csv('geomData.csv')
+    return(NULL)
   
   } else {
     read.csv(infile$datapath)
@@ -360,6 +360,8 @@ Column {data-width=225}
 
 #Render dataset
 renderTable({
+  if (is.null(d())) return(NULL)
+  
   d()
 })
 
@@ -375,6 +377,15 @@ Column {.tabset}
 #Render version 1
 renderPlot({
   data <- d()
+  
+  if (is.null(data)) return(NULL)
+  
+  req(data,
+      input$xVec,
+      input$yVec,
+      input$zVec,
+      input$cVec)
+  
   pltnD(regPlot = TRUE,
         vertPlot = FALSE,
         fancyPlot = FALSE,
@@ -401,6 +412,15 @@ renderPlot({
 #Render version 2
 renderPlot({
   data <- d()
+  
+  if(is.null(data)) return(NULL)
+  
+  req(data,
+      input$xVec,
+      input$yVec,
+      input$zVec,
+      input$cVec)
+  
   pltnD(regPlot = FALSE,
         vertPlot = TRUE,
         fancyPlot = FALSE,
@@ -427,6 +447,15 @@ renderPlot({
 #Render version 3
 renderPlot({
   data <- d()
+  
+  if (is.null(data)) return(NULL)
+  
+  req(data,
+      input$xVec,
+      input$yVec,
+      input$zVec,
+      input$cVec)
+  
   pltnD(regPlot = FALSE,
         vertPlot = FALSE,
         fancyPlot = TRUE,
