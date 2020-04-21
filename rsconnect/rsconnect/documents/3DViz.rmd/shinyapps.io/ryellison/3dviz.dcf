@@ -1,0 +1,10 @@
+name: 3dviz
+title:
+username:
+account: ryellison
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2153493
+bundleId: 3041812
+url: https://ryellison.shinyapps.io/3dviz/
+when: 1587431557.85804
