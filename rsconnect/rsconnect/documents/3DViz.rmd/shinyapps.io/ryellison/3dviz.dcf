@@ -5,6 +5,6 @@ account: ryellison
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2153493
-bundleId: 3041917
+bundleId: 3041971
 url: https://ryellison.shinyapps.io/3dviz/
-when: 1587434619.64659
+when: 1587435731.72756
