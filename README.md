@@ -1,4 +1,6 @@
 
+<img src="./rmd/fts/hex.png" width="22.5%" height="22.5%" style="display: block; margin: auto;" />
+
 # Summary
 
 3DViz is a dynamic 3D/4D visualization dashboard, written in
@@ -20,9 +22,9 @@ represents a vector of data. For example:
 
 <img src="./rmd/fts/tbl.png" style="display: block; margin: auto;" />
 
-<br/> Once data is loaded, user controls can be manipulated to select
-vectors of data to plot, alter characteristics of the plot, and export
-different versions as .pdf files.
+Once data is loaded, user controls can be manipulated to select vectors
+of data to plot, alter characteristics of the plot, and export different
+versions as .pdf files.
 
 # Local 3DViz
 

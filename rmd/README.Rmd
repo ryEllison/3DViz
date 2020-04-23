@@ -35,6 +35,8 @@ sticker('./rmd/fts/img.jpg',
         filename = './rmd/fts/hex.png',
         dpi = 2000)
 
+include_graphics('./rmd/fts/hex.png')
+
 ```
 
 # Summary
@@ -71,7 +73,7 @@ include_graphics('./rmd/fts/tbl.png')
 
 ```
 
-<br/> Once data is loaded, user controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as .pdf files.
+Once data is loaded, user controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as .pdf files.
 
 # Local 3DViz
 
