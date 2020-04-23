@@ -51,7 +51,7 @@ include_graphics('./rmd/fts/hex.png')
 
 Once 3DViz is launched, the user should select a dataset via the browser button. The data file should be structured such that each column represents a vector of data (table below). Once data is loaded, user controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as .pdf files.
 
-```{r, tbl, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', fig.height = 2.125}
+```{r, tbl, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', out.width = '50%', out.height = '50%'}
 
 ##Sys block
 options(warn = -1)
@@ -69,7 +69,7 @@ options(warn = -1)
 library(knitr)
 
 ##Code block
-include_graphics('./rmd/fts/tbl.png')
+include_graphics('./rmd/fts/tbl.jpg')
 
 ```
 

@@ -23,7 +23,7 @@ controls can be manipulated to select vectors of data to plot, alter
 characteristics of the plot, and export different versions as .pdf
 files.
 
-<img src="./rmd/fts/tbl.png" style="display: block; margin: auto;" />
+<img src="./rmd/fts/tbl.jpg" width="50%" height="50%" style="display: block; margin: auto;" />
 
 # Local 3DViz
 
