@@ -1,6 +1,4 @@
 
-<img src="./rmd/fts/hex.png" width="22.5%" height="22.5%" style="display: block; margin: auto;" />
-
 # Summary
 
 3DViz is a dynamic 3D/4D visualization dashboard, written in
@@ -20,7 +18,7 @@ Once 3DViz is launched, the user should select a dataset via the browser
 button. The data file should be structured such that each column
 represents a vector of data. For example:
 
-<img src="README_files/figure-gfm/tbl-1.png" style="display: block; margin: auto;" />
+<img src="./rmd/fts/tbl.png" style="display: block; margin: auto;" />
 
 <br/> Once data is loaded, user controls can be manipulated to select
 vectors of data to plot, alter characteristics of the plot, and export

@@ -35,8 +35,6 @@ sticker('./rmd/fts/img.jpg',
         filename = './rmd/fts/hex.png',
         dpi = 2000)
 
-include_graphics('./rmd/fts/hex.png')
-
 ```
 
 # Summary
@@ -56,14 +54,20 @@ Once 3DViz is launched, the user should select a dataset via the browser button.
 ##Sys block
 options(warn = -1)
 
+# ##Library block
+# library(ggplot2)
+# library(gridExtra)
+# 
+# ##Code block
+# table <- read.csv('./rmd/fts/geomData.csv')
+# tbl <- tableGrob(head(table), rows = NULL)
+# grid.arrange(tbl)
+
 ##Library block
-library(ggplot2)
-library(gridExtra)
+library(knitr)
 
 ##Code block
-table <- read.csv('./rmd/fts/geomData.csv')
-tbl <- tableGrob(head(table), rows = NULL)
-grid.arrange(tbl)
+include_graphics('./rmd/fts/tbl.png')
 
 ```
 
