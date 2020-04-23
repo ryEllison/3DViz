@@ -51,6 +51,8 @@ include_graphics('./rmd/fts/hex.png')
 
 Once 3DViz is launched, the user should select a dataset via the browser button. The data file should be structured such that each column represents a vector of data. For example:
 
+\linebreak
+
 ```{r, tbl, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', fig.height = 2.25}
 
 ##Sys block
