@@ -4,7 +4,7 @@ output:
     keep_html: TRUE
 ---
         
-```{r, hex, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', out.width = '25%', out.height = '25%'}
+```{r, hex, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', out.width = '22.5%', out.height = '22.5%'}
 
 ##Sys block
 options(warn = -1)
@@ -41,13 +41,43 @@ include_graphics('./rmd/fts/hex.png')
 
 # Summary
 
-3DViz is a 3D/4D visualization dashboard, written in [R 3.6.2](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a [Shiny](https://shiny.rstudio.com/) backend, that produces publishable high-dimensional figures. 3DViz is pre-packaged with a complete computational engine. As such, 3DViz can be downloaded, configured, and launched utilizing an end-user's local system as its server.
+3DViz is a dynamic 3D/4D visualization dashboard, written in [R 3.6.2](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a [Shiny](https://shiny.rstudio.com/) backend, that produces publishable high-dimensional figures.
 
-# Download/Configure
+# Deployed 3DViz
+
+3DViz was deployed using [shiny.io by Rstudio](https://www.shinyapps.io/), and can be found here: [https://ryellison.shinyapps.io/3dviz/](https://ryellison.shinyapps.io/3dviz/).
+
+## Use
+
+Once 3DViz is launched, the user should select a dataset via the browser button. The data file should be structured such that each column represents a vector of data. For example:
+
+```{r, tbl, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', fig.height = 2.25}
+
+##Sys block
+options(warn = -1)
+
+##Library block
+library(ggplot2)
+library(gridExtra)
+
+##Code block
+table <- read.csv('./rmd/fts/geomData.csv')
+tbl <- tableGrob(head(table), rows = NULL)
+grid.arrange(tbl)
+
+```
+
+<br/> Once data is loaded, user controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as .pdf files.
+
+# Local 3DViz
+
+The local version of 3DViz is pre-packaged with a complete computational engine. As such, 3DViz can be downloaded, configured, and launched utilizing an end-user's local system as its server. Note, there may be compatibility issues with the native computational engine.
+
+## Download/Configure
 
 3DViz can be downloaded from its [Github](https://github.com/ryEllison/3DViz) repo. Once downloaded, the __config.bat__ executable should be launched to ensure proper backend configuration on the user's local system before use. 3DViz configuration is only needed once. 
 
-# Use
+## Use
 
 After 3DViz configuration, the application can be launched and used as follows:
 
@@ -63,12 +93,12 @@ After 3DViz configuration, the application can be launched and used as follows:
 
 4. A file browser will appear, and the user can navigate to and select a __\*.csv__ dataset
 
-    + The data file should be structured such that each column represents a vector of data (datasets meant for testing purposes can be referred to as examples, see __Test__)
+    + The data file should be structured such that each column represents a vector of data (see __Deployed 3DViz, Use__)
 
 5. Once a dataset is selected, 3DViz will load in the data and open
 
     + User controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as pdf files
 
-# Test
+## Test
 
-When 3DViz is launched (see __Use__), a file browser will appear. Inside the file browser should be three toy datasets. The user should select one of these datasets, plot the data, and export the figure as a test of proper configuration and function of the Shiny dashboard.
+When 3DViz is launched (see __Use__), a file browser will appear. Inside the file browser should be three toy datasets. The user should select one of these datasets, plot the data, and export figures as a test of proper configuration and function of the Shiny dashboard.

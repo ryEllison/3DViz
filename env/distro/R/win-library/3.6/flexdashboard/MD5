@@ -1,4 +1,4 @@
-986144ccdd2f3fa7e667e1246b33adfb *DESCRIPTION
+bb5749327ddbf1c9b97e5ef92053f4ea *DESCRIPTION
 72630e07ccac415f4e0cbc8ff1c39ce1 *INDEX
 86d570e2967dfc6b6aa30c1cf71b2bd2 *LICENSE
 2f5ea9339617d2d2b64dbd8cd14626d7 *Meta/Rd.rds
@@ -6,7 +6,7 @@
 d9ba16888b8627dbc596ff2acf3bd664 *Meta/hsearch.rds
 524102f537388db4d550327e48d9e1de *Meta/links.rds
 fdfc276cd84cfcd9099cf4b7d15d608d *Meta/nsInfo.rds
-bed598dfa5cdd311f65adce4b7419492 *Meta/package.rds
+0ce1e5dfe9cd3d203c2839284e543048 *Meta/package.rds
 b5026108f222f92630cfefb252b0e1a3 *NAMESPACE
 a5fc8550d2ae1d1988df429a8caadb4c *NEWS.md
 ebf0fc819595d631b8bf280c4b049940 *R/flexdashboard
@@ -31,9 +31,9 @@ af63d3eadd9e4b23c3ad48e62c517793 *examples/shiny-ggplot2-diamonds.Rmd
 e1c6c59754bf12b0c5dc7bced2c0f6e8 *examples/shiny-kmeans.Rmd
 45f88f17ef5953338b1add6e4c795659 *help/AnIndex
 84947d5a1b842eb33ddfff4ceb21643d *help/aliases.rds
-cd73f79514d620ba6c2bdc6ad61e30c1 *help/flexdashboard.rdb
-029ca3d9ad7162711ba62635d6ef3713 *help/flexdashboard.rdx
-072b977c4d681f78d93608b92a865ef8 *help/paths.rds
+ea20416e14d1699533a357a28a8ccbef *help/flexdashboard.rdb
+87c3ba304e5f59f544822fe64edc4d21 *help/flexdashboard.rdx
+a567023a5b90b8ed91527384a15256af *help/paths.rds
 5314055270c1b6cc3df7557884c0673b *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css
 fca9f312a9015f121112bc2ac13f3ac4 *htmlwidgets/gauge.js

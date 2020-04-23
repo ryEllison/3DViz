@@ -1,4 +1,4 @@
-f4fada783b73efd0d78eb70c339b15cb *DESCRIPTION
+259be57cb6de9254cca362a1d1804dec *DESCRIPTION
 e53ee2a7a21781130a692dc190f171b7 *INDEX
 a075abb626e77856a26e269fb71e203f *Meta/Rd.rds
 3dc745809922b92978f1a3bd7bf440db *Meta/data.rds
@@ -6,7 +6,7 @@ a075abb626e77856a26e269fb71e203f *Meta/Rd.rds
 32625c420b657bb92d6b86c6a24819a8 *Meta/hsearch.rds
 78dd1d0006fc23b38b6ae7319f2b4b0f *Meta/links.rds
 6326cb5592d4bae82ea26cdfcf4f4ec4 *Meta/nsInfo.rds
-667165aab32c995a6082b0e3fbdc08cb *Meta/package.rds
+63d1491d62fb47f9fe5b277ec390ac0b *Meta/package.rds
 71c583ab30c4426dbaa5745d4e152b0c *Meta/vignette.rds
 770350ada846894bdc7a5e131cd49833 *NAMESPACE
 ebf0fc819595d631b8bf280c4b049940 *R/plot3D
@@ -25,8 +25,8 @@ f461d6910590a0dc3eb54486ba6d449b *doc/plot3D.rnw
 55cf65b880b57852c3d8e49f9d709e1f *doc/volcano.rnw
 19afeb12169b2d050a2ff2237ca292eb *help/AnIndex
 3b0d901f88238ecc2d1fdba4e3ed0a08 *help/aliases.rds
-02f51156a702c0f1db8723e92454a3aa *help/paths.rds
-d326c0f37aa439fe6855d28a042b5ccd *help/plot3D.rdb
-fbb8b8eaf0fe5730bde08c64b2e3fad7 *help/plot3D.rdx
+0689059e1ffbf167c07f79c1a105c129 *help/paths.rds
+7fc0cb3cd2167eb18ed8a38d749a35c6 *help/plot3D.rdb
+a1b53337e2b8f82a86a04e87c9ea91ed *help/plot3D.rdx
 e944cc17f4607442f6ce1ced30b28e79 *html/00Index.html
 b6763e6916890c631fdc3f2643803b1a *html/R.css

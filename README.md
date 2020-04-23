@@ -1,16 +1,39 @@
 
-<img src="./rmd/fts/hex.png" width="25%" height="25%" style="display: block; margin: auto;" />
+<img src="./rmd/fts/hex.png" width="22.5%" height="22.5%" style="display: block; margin: auto;" />
 
 # Summary
 
-3DViz is a 3D/4D visualization dashboard, written in
+3DViz is a dynamic 3D/4D visualization dashboard, written in
 [R 3.6.2](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a
 [Shiny](https://shiny.rstudio.com/) backend, that produces publishable
-high-dimensional figures. 3DViz is pre-packaged with a complete
-computational engine. As such, 3DViz can be downloaded, configured, and
-launched utilizing an end-user’s local system as its server.
+high-dimensional figures.
 
-# Download/Configure
+# Deployed 3DViz
+
+3DViz was deployed using [shiny.io by
+Rstudio](https://www.shinyapps.io/), and can be found here:
+<https://ryellison.shinyapps.io/3dviz/>.
+
+## Use
+
+Once 3DViz is launched, the user should select a dataset via the browser
+button. The data file should be structured such that each column
+represents a vector of data. For example:
+
+<img src="README_files/figure-gfm/tbl-1.png" style="display: block; margin: auto;" />
+
+<br/> Once data is loaded, user controls can be manipulated to select
+vectors of data to plot, alter characteristics of the plot, and export
+different versions as .pdf files.
+
+# Local 3DViz
+
+The local version of 3DViz is pre-packaged with a complete computational
+engine. As such, 3DViz can be downloaded, configured, and launched
+utilizing an end-user’s local system as its server. Note, there may be
+compatibility issues with the native computational engine.
+
+## Download/Configure
 
 3DViz can be downloaded from its
 [Github](https://github.com/ryEllison/3DViz) repo. Once downloaded, the
@@ -18,7 +41,7 @@ launched utilizing an end-user’s local system as its server.
 configuration on the user’s local system before use. 3DViz configuration
 is only needed once.
 
-# Use
+## Use
 
 After 3DViz configuration, the application can be launched and used as
 follows:
@@ -39,8 +62,7 @@ follows:
     a **\*.csv** dataset
     
       - The data file should be structured such that each column
-        represents a vector of data (datasets meant for testing purposes
-        can be referred to as examples, see **Test**)
+        represents a vector of data (see **Deployed 3DViz, Use**)
 
 5.  Once a dataset is selected, 3DViz will load in the data and open
     
@@ -48,9 +70,9 @@ follows:
         plot, alter characteristics of the plot, and export different
         versions as pdf files
 
-# Test
+## Test
 
 When 3DViz is launched (see **Use**), a file browser will appear. Inside
 the file browser should be three toy datasets. The user should select
-one of these datasets, plot the data, and export the figure as a test of
+one of these datasets, plot the data, and export figures as a test of
 proper configuration and function of the Shiny dashboard.
