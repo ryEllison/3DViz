@@ -18,13 +18,12 @@ Rstudio](https://www.shinyapps.io/), and can be found here:
 
 Once 3DViz is launched, the user should select a dataset via the browser
 button. The data file should be structured such that each column
-represents a vector of data. For example:
+represents a vector of data (table below). Once data is loaded, user
+controls can be manipulated to select vectors of data to plot, alter
+characteristics of the plot, and export different versions as .pdf
+files.
 
 <img src="./rmd/fts/tbl.png" style="display: block; margin: auto;" />
-
-Once data is loaded, user controls can be manipulated to select vectors
-of data to plot, alter characteristics of the plot, and export different
-versions as .pdf files.
 
 # Local 3DViz
 
