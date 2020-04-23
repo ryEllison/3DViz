@@ -4,7 +4,7 @@
 # Summary
 
 3DViz is a dynamic 3D/4D visualization dashboard, written in
-[R 3.6.2](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a
+[R](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a
 [Shiny](https://shiny.rstudio.com/) backend, that produces publishable
 high-dimensional figures.
 
@@ -16,12 +16,12 @@ Rstudio](https://www.shinyapps.io/), and can be found here:
 
 ## Use
 
-Once 3DViz is launched, the user should select a dataset via the browser
-button. The data file should be structured such that each column
-represents a vector of data (table below). Once data is loaded, user
-controls can be manipulated to select vectors of data to plot, alter
-characteristics of the plot, and export different versions as .pdf
-files.
+Once 3DViz is launched, the user should select a dataset via the
+**browser** button. The **\*.csv** data file should be structured such
+that each column represents a vector of data (example below). Once data
+is loaded, user controls can be manipulated to select vectors of data to
+plot, alter characteristics of the plot, and export different versions
+as **.pdf** files.
 
 <img src="./rmd/fts/tbl.jpg" width="50%" height="50%" style="display: block; margin: auto;" />
 
@@ -67,7 +67,7 @@ follows:
     
       - User controls can be manipulated to select vectors of data to
         plot, alter characteristics of the plot, and export different
-        versions as pdf files
+        versions as **.pdf** files
 
 ## Test
 

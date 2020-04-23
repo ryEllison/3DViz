@@ -41,7 +41,7 @@ include_graphics('./rmd/fts/hex.png')
 
 # Summary
 
-3DViz is a dynamic 3D/4D visualization dashboard, written in [R 3.6.2](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a [Shiny](https://shiny.rstudio.com/) backend, that produces publishable high-dimensional figures.
+3DViz is a dynamic 3D/4D visualization dashboard, written in [R](https://cran.r-project.org/bin/windows/base/old/3.6.2/) with a [Shiny](https://shiny.rstudio.com/) backend, that produces publishable high-dimensional figures.
 
 # Deployed 3DViz
 
@@ -49,7 +49,7 @@ include_graphics('./rmd/fts/hex.png')
 
 ## Use
 
-Once 3DViz is launched, the user should select a dataset via the browser button. The data file should be structured such that each column represents a vector of data (table below). Once data is loaded, user controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as .pdf files.
+Once 3DViz is launched, the user should select a dataset via the __browser__ button. The __\*.csv__ data file should be structured such that each column represents a vector of data (example below). Once data is loaded, user controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as __.pdf__ files.
 
 ```{r, tbl, eval = TRUE, echo = FALSE, message = FALSE, fig.align = 'center', out.width = '50%', out.height = '50%'}
 
@@ -101,7 +101,7 @@ After 3DViz configuration, the application can be launched and used as follows:
 
 5. Once a dataset is selected, 3DViz will load in the data and open
 
-    + User controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as pdf files
+    + User controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as __.pdf__ files
 
 ## Test
 
