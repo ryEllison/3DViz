@@ -3,7 +3,7 @@ title: '3DViz'
 author: 'Ryan Ellison'
 output: 
   flexdashboard::flex_dashboard:
-    runtime: shiny
+runtime: shiny
 ---
   
 ```{r, include = FALSE}
@@ -15,10 +15,10 @@ options(warn = -1)
 ###Library block
 library(plot3D)
 library(RColorBrewer)
-library(jsonlite)
+library(plotly)
 
 ###Fxn block
-scatter3D_fancy <- function(x, y, z,..., col, colvar = z){
+scatter3D_fancy <- function(x, y, z, ..., col, colvar = z){
   if (FALSE){
     'nD visualization with XY 2D mapping'
   }
@@ -40,7 +40,7 @@ scatter3D_fancy <- function(x, y, z,..., col, colvar = z){
   }
   
   #Create 3D projection
-  scatter3D(x, y, z,..., 
+  scatter3D(x, y, z, ...,
             colvar = colvar,
             col = col,
             colkey = list(length = 0.5, 
@@ -49,13 +49,14 @@ scatter3D_fancy <- function(x, y, z,..., col, colvar = z){
             panel.first = panelFirst)
 }
 
-pltnD <- function(regPlot, vertPlot, fancyPlot, x, y, z, c, xLab, yLab, zLab, cLab, size3D, pal, theta, phi){
+pltnD <- function(regPlot, vertPlot, fancyPlot, x, y, z, c, xLab, yLab, zLab, cLab, point3D, line3D, pal, type, theta, phi){
   if (FALSE){
     'nD plotting fxn'
   }
   
-  #Visualize
+  #Boolean(s) for type of 3D visualization
   if (regPlot){
+    #Visualize
     scatter3D(x, y, z,
               colvar = c,
               colkey = list(length = 0.5,
@@ -67,9 +68,10 @@ pltnD <- function(regPlot, vertPlot, fancyPlot, x, y, z, c, xLab, yLab, zLab, cL
               zlab = zLab,
               bty = 'g',
               pch = 20,
-              cex = size3D,
+              cex = point3D,
+              lwd = line3D,
               col = pal,
-              type = 'p',
+              type = type,
               ticktype = 'detailed',
               theta = theta,
               phi = phi)  
@@ -88,7 +90,8 @@ pltnD <- function(regPlot, vertPlot, fancyPlot, x, y, z, c, xLab, yLab, zLab, cL
               zlab = zLab,
               bty = 'g',
               pch = 20,
-              cex = size3D,
+              cex = point3D,
+              lwd = line3D,
               col = pal,
               type = 'h',
               ticktype = 'detailed',
@@ -106,8 +109,10 @@ pltnD <- function(regPlot, vertPlot, fancyPlot, x, y, z, c, xLab, yLab, zLab, cL
                     zlab = zLab,
                     bty = 'g',
                     pch = 20,
-                    cex = size3D,
+                    cex = point3D,
+                    lwd = line3D,
                     col = pal,
+                    type = type,
                     ticktype = 'detailed',
                     theta = theta,
                     phi = phi)
@@ -139,6 +144,36 @@ Inputs {.sidebar data-width=325}
 fileInput(inputId = 'data',
           label = 'Select File')
 
+#Reactivity for data slicing
+output$sub <- renderUI({
+  #Data dump
+  data <- d()
+
+  #If data not selected, render place holder
+  if (is.null(data)){
+    return(sliderInput(inputId = 'sub',
+                       label = 'Subset Data',
+                       min = -1,
+                       max = 1,
+                       step = 0.25,
+                       value = c(-0.5, 0.5)))
+  }
+  
+  #Require object to proceed
+  req(data)
+  
+  #Slider widget
+  sliderInput(inputId = 'sub',
+              label = 'Subset Data',
+              min = head(data[[1]], n = 1),
+              max = length(data[[1]]),
+              step = 1,
+              value = c(head(data[[1]], n = 1), length(data[[1]])))
+})
+
+#Render slider widget
+uiOutput('sub')
+
 ```
 
 ### __X Axis__
@@ -147,19 +182,21 @@ fileInput(inputId = 'data',
 
 #Reactivity for vector selection
 output$x <- renderUI({
+  #Data dump
   data <- d()
   
+  #Select input widget
   selectInput(inputId = 'xVec',
               label = 'Vector',
               choices = names(data))
 })
 
-#Render selection widget
+#Render selection widgets
 uiOutput('x')
 
 #Text input widget
 textInput(inputId = 'xLab',
-            label = 'Label')
+          label = 'Label')
 
 
 ```
@@ -170,8 +207,10 @@ textInput(inputId = 'xLab',
 
 #Reactivity for vector selection
 output$y <- renderUI({
+  #Data dump
   data <- d()
   
+  #Select input widget
   selectInput(inputId = 'yVec',
               label = 'Vector',
               choices = names(data))
@@ -192,8 +231,10 @@ textInput(inputId = 'yLab',
 
 #Reactivity for vector selection
 output$z <- renderUI({
+  #Data dump
   data <- d()
   
+  #Select input widget
   selectInput(inputId = 'zVec',
               label = 'Vector',
               choices = names(data))
@@ -214,8 +255,10 @@ textInput(inputId = 'zLab',
 
 #Reactivity for vector selection
 output$c <- renderUI({
+  #Data dump
   data <- d()
   
+  #Select input widget
   selectInput(inputId = 'cVec',
               label = 'Vector',
               choices = names(data))
@@ -234,13 +277,49 @@ textInput(inputId = 'cLab',
 
 ```{r}
 
-#Slider widget
-sliderInput(inputId = 'size', 
-            label = 'Symbol Size',
-            min = 0, 
-            max = 5,
-            step = 0.25,
-            value = 1)
+#Radio button widget
+div(style = 'display: inline-block; width: 98%; text-align: center',
+    radioButtons(inputId = 'style',
+                 label = 'Select Style',
+                 choices = c('Points',
+                             'Lines',
+                             'Points + Lines'),
+                 inline = TRUE))
+
+#Reactivity for style selection
+output$style <- renderUI({
+  #Boolean(s) for style selection widget
+  if (input$style == 'Points'){
+    #Slider widget
+    sliderInput(inputId = 'size', 
+                label = 'Point Size',
+                min = 0, 
+                max = 5,
+                step = 0.25,
+                value = 1)
+  
+  } else if (input$style == 'Lines'){
+    #Slider widget
+    sliderInput(inputId = 'size', 
+                label = 'Line Size',
+                min = 0, 
+                max = 5,
+                step = 0.25,
+                value = 1)
+  
+  } else {
+    #Slider widget
+    sliderInput(inputId = 'size', 
+                label = 'Point + Line Size',
+                min = 0, 
+                max = 5,
+                step = 0.25,
+                value = 1)
+  }
+})
+
+#Render slider widget
+uiOutput('style')
 
 #Selection widget
 selectInput(inputId = 'col',
@@ -286,60 +365,106 @@ div(style = 'display: inline-block; width: 98%; text-align: center',
 output$save <- downloadHandler(
   file = function(){paste(floor(runif(1, min = 0, max = 10^10)), '.pdf', sep = '')},
   content = function(file){
+    #Data dump
     data <- d()
     
+    #Create plotting device
     pdf(file)
     
+    #Boolean(s) version export
     if (input$version == 'Version 1'){
+      #Reactive assignment
+      sizePoint <- input$size
+      sizeLine <- input$size
+      
+      #Boolean for style selection
+      if (input$style == 'Points'){
+        type <- 'p'
+          
+      } else if (input$style == 'Lines'){
+        type <- 'l'
+        
+      } else {
+        type <- 'b'
+      }
+       
+      #Write to device 
       pltnD(regPlot = TRUE,
             vertPlot = FALSE,
             fancyPlot = FALSE,
-            data[,c(input$xVec)],
-            data[,c(input$yVec)],
-            data[,c(input$zVec)],
-            data[,c(input$cVec)],
+            data[,input$xVec][c(input$sub[1]:input$sub[2])],
+            data[,input$yVec][c(input$sub[1]:input$sub[2])],
+            data[,input$zVec][c(input$sub[1]:input$sub[2])],
+            data[,input$cVec][c(input$sub[1]:input$sub[2])],
             input$xLab,
             input$yLab,
             input$zLab,
             input$cLab,
-            input$size,
-            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+            sizePoint,
+            sizeLine,
+            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),
+            type,
             input$horizontal,
             input$vertical)
     }
     
     if (input$version == 'Version 2'){
+      #Reactive assignment
+      sizePoint <- input$size
+      sizeLine <- input$size
+      
+      #Write to device
       pltnD(regPlot = FALSE,
             vertPlot = TRUE,
             fancyPlot = FALSE,
-            data[,c(input$xVec)],
-            data[,c(input$yVec)],
-            data[,c(input$zVec)],
-            data[,c(input$cVec)],
+            data[,input$xVec][c(input$sub[1]:input$sub[2])],
+            data[,input$yVec][c(input$sub[1]:input$sub[2])],
+            data[,input$zVec][c(input$sub[1]:input$sub[2])],
+            data[,input$cVec][c(input$sub[1]:input$sub[2])],
             input$xLab,
             input$yLab,
             input$zLab,
             input$cLab,
-            input$size,
-            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))), 
+            sizePoint,
+            sizeLine,
+            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),
+            type,    
             input$horizontal,
             input$vertical)
     }
     
     if (input$version == 'Version 3'){
+      #Reactive assignment
+      sizePoint <- input$size
+      sizeLine <- input$size
+        
+      #Boolean for style selection
+      if (input$style == 'Points'){
+        type <- 'p'
+        
+      } else if (input$style == 'Lines'){
+        type <- 'l'
+        
+      } else {
+        type <- 'b'
+      }
+      
+      #Write to device
       pltnD(regPlot = FALSE,
             vertPlot = FALSE,
             fancyPlot = TRUE,
-            data[,c(input$xVec)],
-            data[,c(input$yVec)],
-            data[,c(input$zVec)],
-            data[,c(input$cVec)],
+            data[,input$xVec][c(input$sub[1]:input$sub[2])],
+            data[,input$yVec][c(input$sub[1]:input$sub[2])],
+            data[,input$zVec][c(input$sub[1]:input$sub[2])],
+            data[,input$cVec][c(input$sub[1]:input$sub[2])],
             input$xLab,
             input$yLab,
             input$zLab,
             input$cLab,
-            input$size,
-            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),  
+            sizePoint,
+            sizeLine,
+            c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),
+            type,  
             input$horizontal,
             input$vertical)
     }
@@ -369,36 +494,57 @@ renderTable({
 
 Column {.tabset}
 ------------------------------------------------------
-  
+
 ### Version 1
   
 ```{r}
 
 #Render version 1
 renderPlot({
+  #Data dump
   data <- d()
   
+  #Reactive assignment
+  sizePoint <- input$size
+  sizeLine <- input$size
+  
+  #Boolean for style selection
+  if (input$style == 'Points'){
+    type <- 'p'
+    
+  } else if (input$style == 'Lines'){
+    type <- 'l'
+    
+  } else {
+    type <- 'b'
+  }
+  
+  #Return NULL if data not selected
   if (is.null(data)) return(NULL)
   
+  #Require objects before proceeding
   req(data,
       input$xVec,
       input$yVec,
       input$zVec,
       input$cVec)
   
+  #Visualize
   pltnD(regPlot = TRUE,
         vertPlot = FALSE,
         fancyPlot = FALSE,
-        data[,c(input$xVec)],
-        data[,c(input$yVec)],
-        data[,c(input$zVec)],
-        data[,c(input$cVec)],
+        data[,input$xVec][c(input$sub[1]:input$sub[2])],
+        data[,input$yVec][c(input$sub[1]:input$sub[2])],
+        data[,input$zVec][c(input$sub[1]:input$sub[2])],
+        data[,input$cVec][c(input$sub[1]:input$sub[2])],
         input$xLab,
         input$yLab,
         input$zLab,
         input$cLab,
-        input$size,
-        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),   
+        sizePoint,
+        sizeLine,
+        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),
+        type,
         input$horizontal,
         input$vertical)
 })
@@ -411,29 +557,39 @@ renderPlot({
 
 #Render version 2
 renderPlot({
+  #Data dump
   data <- d()
   
+  #Reactive assignment
+  sizePoint <- input$size
+  sizeLine <- input$size
+  
+  #Return NULL if data not selected
   if(is.null(data)) return(NULL)
   
+  #Require objects before proceeding
   req(data,
       input$xVec,
       input$yVec,
       input$zVec,
       input$cVec)
   
+  #Visualize
   pltnD(regPlot = FALSE,
         vertPlot = TRUE,
         fancyPlot = FALSE,
-        data[,c(input$xVec)],
-        data[,c(input$yVec)],
-        data[,c(input$zVec)],
-        data[,c(input$cVec)],
+        data[,input$xVec][c(input$sub[1]:input$sub[2])],
+        data[,input$yVec][c(input$sub[1]:input$sub[2])],
+        data[,input$zVec][c(input$sub[1]:input$sub[2])],
+        data[,input$cVec][c(input$sub[1]:input$sub[2])],
         input$xLab,
         input$yLab,
         input$zLab,
         input$cLab,
-        input$size,
-        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),    
+        sizePoint,
+        sizeLine,
+        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),
+        type,    
         input$horizontal,
         input$vertical)
 })
@@ -446,29 +602,50 @@ renderPlot({
 
 #Render version 3
 renderPlot({
+  #Data dump
   data <- d()
   
+  #Reactive assignment
+  sizePoint <- input$size
+  sizeLine <- input$size
+  
+  #Boolean for style selection
+  if (input$style == 'Points'){
+    type <- 'p'
+
+  } else if (input$style == 'Lines'){
+    type <- 'l'
+    
+  } else {
+    type <- 'b'
+  }
+  
+  #Return NULL if data not selected
   if (is.null(data)) return(NULL)
   
+  #Require objects before proceeding
   req(data,
       input$xVec,
       input$yVec,
       input$zVec,
       input$cVec)
   
+  #Visualize
   pltnD(regPlot = FALSE,
         vertPlot = FALSE,
         fancyPlot = TRUE,
-        data[,c(input$xVec)],
-        data[,c(input$yVec)],
-        data[,c(input$zVec)],
-        data[,c(input$cVec)],
+        data[,input$xVec][c(input$sub[1]:input$sub[2])],
+        data[,input$yVec][c(input$sub[1]:input$sub[2])],
+        data[,input$zVec][c(input$sub[1]:input$sub[2])],
+        data[,input$cVec][c(input$sub[1]:input$sub[2])],
         input$xLab,
         input$yLab,
         input$zLab,
         input$cLab,
-        input$size,
-        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),   
+        sizePoint,
+        sizeLine,
+        c(color = colorRampPalette(brewer.pal(10, input$col))(length(data[,c(input$xVec)]))),
+        type,  
         input$horizontal,
         input$vertical)
 })
