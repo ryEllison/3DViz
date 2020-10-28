@@ -9,10 +9,24 @@ output:
 ##Sys block
 options(warn = -1)
 
+##Dependency check and/or installation
+dependencies <- c('showtext',
+		              'hexSticker',
+		              'knitr')
+
+for (i in dependencies){
+	if (i %in% rownames(installed.packages()) == TRUE){
+	  NULL
+	
+	}else{
+	  install.packages(i, repos = 'http://cran.rstudio.com/')
+	}
+}
+
 ##Library block
-library(showtext)
-library(hexSticker)
-library(knitr)
+for (i in dependencies){
+  library(i, character.only = TRUE)
+}
 
 ##Code block
 font_add_google('Righteous', 'text')
@@ -65,23 +79,37 @@ options(warn = -1)
 # tbl <- tableGrob(head(table), rows = NULL)
 # grid.arrange(tbl)
 
+##Dependency check and/or installation
+for (i in dependencies){
+	if ('kintr' %in% rownames(installed.packages()) == TRUE){
+	  NULL
+	
+	}else{
+	  install.packages('knitr', repos = 'http://cran.rstudio.com/')
+	}
+}
+
 ##Library block
-library(knitr)
+library('knitr')
 
 ##Code block
 include_graphics('./rmd/fts/tbl.jpg')
 
 ```
 
-# Local 3DViz
+# Shiny + Electron
+
+# Deprecated
+
+## Local 3DViz
 
 The local version of 3DViz is pre-packaged with a complete computational engine. As such, 3DViz can be downloaded, configured, and launched utilizing an end-user's local system as its server. Note, there may be compatibility issues with the native computational engine.
 
-## Download/Configure
+### Download/Configure
 
 3DViz can be downloaded from its [Github](https://github.com/ryEllison/3DViz) repo. Once downloaded, the __config.bat__ executable should be launched to ensure proper backend configuration on the user's local system before use. 3DViz configuration is only needed once. 
 
-## Use
+### Use
 
 After 3DViz configuration, the application can be launched and used as follows:
 
@@ -103,6 +131,6 @@ After 3DViz configuration, the application can be launched and used as follows:
 
     + User controls can be manipulated to select vectors of data to plot, alter characteristics of the plot, and export different versions as __.pdf__ files
 
-## Test
+### Test
 
 When 3DViz is launched (see __Use__), a file browser will appear. Inside the file browser should be three toy datasets. The user should select one of these datasets, plot the data, and export figures as a test of proper configuration and function of the Shiny dashboard.

@@ -25,14 +25,18 @@ as **.pdf** files.
 
 <img src="./rmd/fts/tbl.jpg" width="50%" height="50%" style="display: block; margin: auto;" />
 
-# Local 3DViz
+# Shiny + Electron
+
+# Deprecated
+
+## Local 3DViz
 
 The local version of 3DViz is pre-packaged with a complete computational
 engine. As such, 3DViz can be downloaded, configured, and launched
 utilizing an end-user’s local system as its server. Note, there may be
 compatibility issues with the native computational engine.
 
-## Download/Configure
+### Download/Configure
 
 3DViz can be downloaded from its
 [Github](https://github.com/ryEllison/3DViz) repo. Once downloaded, the
@@ -40,7 +44,7 @@ compatibility issues with the native computational engine.
 configuration on the user’s local system before use. 3DViz configuration
 is only needed once.
 
-## Use
+### Use
 
 After 3DViz configuration, the application can be launched and used as
 follows:
@@ -69,7 +73,7 @@ follows:
         plot, alter characteristics of the plot, and export different
         versions as **.pdf** files
 
-## Test
+### Test
 
 When 3DViz is launched (see **Use**), a file browser will appear. Inside
 the file browser should be three toy datasets. The user should select
