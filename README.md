@@ -27,6 +27,8 @@ as **.pdf** files.
 
 # Shiny + Electron
 
+***Being developed***
+
 # Deprecated
 
 ## Local 3DViz

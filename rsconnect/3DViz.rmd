@@ -3,7 +3,7 @@ title: '3DViz'
 author: 'Ryan Ellison'
 output: 
   flexdashboard::flex_dashboard:
-runtime: shiny
+    runtime: shiny
 ---
   
 ```{r, include = FALSE}
@@ -15,7 +15,6 @@ options(warn = -1)
 ###Library block
 library(plot3D)
 library(RColorBrewer)
-library(plotly)
 
 ###Fxn block
 scatter3D_fancy <- function(x, y, z, ..., col, colvar = z){

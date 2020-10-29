@@ -99,6 +99,8 @@ include_graphics('./rmd/fts/tbl.jpg')
 
 # Shiny + Electron
 
+__*Being developed*__
+
 # Deprecated
 
 ## Local 3DViz
