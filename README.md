@@ -25,10 +25,6 @@ as **.pdf** files.
 
 <img src="./rmd/fts/tbl.jpg" width="50%" height="50%" style="display: block; margin: auto;" />
 
-# Shiny + Electron
-
-***Being developed***
-
 # Deprecated
 
 ## Local 3DViz
